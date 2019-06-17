@@ -11,6 +11,7 @@
 		534D678C22B82F770085702F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 534D678A22B82F770085702F /* Main.storyboard */; };
 		534D678E22B82F770085702F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 534D678D22B82F770085702F /* Assets.xcassets */; };
 		534D679122B82F770085702F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 534D678F22B82F770085702F /* LaunchScreen.storyboard */; };
+		534D679A22B834D80085702F /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534D679922B834D80085702F /* Alarm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		534D678D22B82F770085702F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		534D679022B82F770085702F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		534D679222B82F770085702F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		534D679922B834D80085702F /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			children = (
 				534D678622B82F770085702F /* AppDelegate.swift */,
 				534D678A22B82F770085702F /* Main.storyboard */,
+				534D679922B834D80085702F /* Alarm.swift */,
 				534D679822B82FFB0085702F /* Resources */,
 			);
 			path = AlarmClock;
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				534D678722B82F770085702F /* AppDelegate.swift in Sources */,
+				534D679A22B834D80085702F /* Alarm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
