@@ -8,9 +8,9 @@
 
 import Foundation
 
-class Alarm {
-    var fireDate: Date
+class Alarm: Codable {
     var alarmName: String
+    var fireDate: Date
     var alarmEnabled: Bool
     var uuid: String
     var fireTimeAsString: String {
@@ -19,7 +19,7 @@ class Alarm {
         dateFormatter.timeStyle = .medium
         return dateFormatter.string(from: fireDate)
     }
-    init(fireDate: Date = Date(), alarmName: String, alarmEnabled: Bool, uuid: String) {
+    init(fireDate: Date = Date(), alarmName: String, alarmEnabled: Bool = true, uuid: String = UUID().uuidString) {
         self.fireDate = fireDate
         self.alarmName = alarmName
         self.alarmEnabled = alarmEnabled
@@ -27,4 +27,9 @@ class Alarm {
     }
 }
 
-
+extension Alarm: Equatable {
+    static func ==(lhs: Alarm, rhs: Alarm) -> Bool {
+        return lhs.alarmName == rhs.alarmName &&
+            lhs.fireDate == rhs.fireDate 
+    }
+}
