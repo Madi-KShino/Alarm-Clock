@@ -10,10 +10,6 @@ import UIKit
 
 class AlarmDetailTableViewController: UITableViewController {
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setUpAlarmButton()
-    }
     
     var alarm: Alarm? {
         didSet {
@@ -29,6 +25,11 @@ class AlarmDetailTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setUpAlarmButton()
     }
 
     private func updateView() {

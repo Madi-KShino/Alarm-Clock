@@ -75,6 +75,7 @@ class AlarmController {
         if let alarmIndex = alarms.firstIndex(of: alarmToDelete) {
             alarms.remove(at: alarmIndex)
             saveToPersistentStore()
+            cancelUserNotifications(for: alarmToDelete)
         }
     }
     

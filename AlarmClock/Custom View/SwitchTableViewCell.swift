@@ -8,14 +8,14 @@
 
 import UIKit
 
-//Define the Delegate Protocol
+//DELEGATE PROTOCOL
 protocol SwitchCellDelegate: class {
     func switchCellSwitchValueChanged(cell: SwitchTableViewCell)
 }
 
 class SwitchTableViewCell: UITableViewCell {
     
-    //Define the Delegate
+    //DEFINE DELEGATE
     weak var cellDelegate: SwitchCellDelegate?
     
     var alarm: Alarm? {
