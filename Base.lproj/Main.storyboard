@@ -52,6 +52,7 @@
                                                     <rect key="frame" x="264" y="0.0" width="51" height="54.5"/>
                                                     <connections>
                                                         <action selector="alarmSwitchToggled:" destination="mHc-I9-m4M" eventType="valueChanged" id="EAJ-UE-1Vb"/>
+                                                        <action selector="switchValueChanged:" destination="mHc-I9-m4M" eventType="valueChanged" id="Wn7-I1-Gvr"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
@@ -66,7 +67,7 @@
                                     <outlet property="nameLabel" destination="wXb-uO-aQg" id="ciH-QD-4Lf"/>
                                     <outlet property="switchValueChanged" destination="aEa-wE-jcl" id="ekS-xe-xCE"/>
                                     <outlet property="timeLabel" destination="3Ic-La-duU" id="39E-R1-SeI"/>
-                                    <segue destination="bCk-WA-iTZ" kind="show" id="Llv-67-YtF"/>
+                                    <segue destination="bCk-WA-iTZ" kind="show" identifier="toAlarmDetailViewController" id="Llv-67-YtF"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -220,6 +221,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="CLA-9R-M6W"/>
+        <segue reference="Llv-67-YtF"/>
     </inferredMetricsTieBreakers>
 </document>

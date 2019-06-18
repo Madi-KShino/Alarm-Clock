@@ -37,6 +37,9 @@ class AlarmController {
             saveToPersistentStore()
         }
     }
+    func toggleEnabled(for alarm: Alarm) {
+        alarm.alarmEnabled = !alarm.alarmEnabled
+    }
     
     //PERSISTENCE FUNCTIONS
     func saveToPersistentStore() {

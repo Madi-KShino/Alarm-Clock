@@ -8,39 +8,36 @@
 
 import UIKit
 
-class AlarmsListTableViewController: UITableViewController {
-
+class AlarmsListTableViewController: UITableViewController, SwitchCellDelegate {
+   
+    //Conform to protocol
+    func switchCellSwitchValueChanged(for cell: SwitchTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let alarm = AlarmController.sharedInstance.alarms[indexPath.row]
+        AlarmController.sharedInstance.toggleEnabled(for: alarm)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return AlarmController.sharedInstance.alarms.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "alarmCell", for: indexPath) as? SwitchTableViewCell else { return UITableViewCell() }
+        let alarmToDisplay = AlarmController.sharedInstance.alarms[indexPath.row]
+        //set delegate
+        cell.delegate = self
+        cell.alarm = alarmToDisplay
+        return cell 
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -50,17 +47,14 @@ class AlarmsListTableViewController: UITableViewController {
     }
     */
 
-    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            let alarmToRemove = AlarmController.sharedInstance.alarms[indexPath.row]
+            AlarmController.sharedInstance.deleteAlarm(alarmToDelete: alarmToRemove)
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
-    */
 
     /*
     // Override to support rearranging the table view.
@@ -77,14 +71,15 @@ class AlarmsListTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toAlarmDetailViewController", let indexPath = tableView.indexPathForSelectedRow {
+            let destinationVC = segue.destination as? AlarmDetailTableViewController
+            let alarmToShow = AlarmController.sharedInstance.alarms[indexPath.row]
+            destinationVC?.alarm = alarmToShow
+        }
+    }
 }
+
