@@ -7,6 +7,35 @@
 //
 
 import Foundation
+import UserNotifications
+
+protocol AlarmScheduler: class {
+    func scheduleUserNotifications(for alarm: Alarm)
+    func cancelUserNotifications(for alarm: Alarm)
+}
+
+extension AlarmController: AlarmScheduler {
+    func scheduleUserNotifications(for alarm: Alarm) {
+        let notificationContent = UNMutableNotificationContent()
+        notificationContent.title = "⏰"
+        notificationContent.body = "Click to View Your Alarm"
+        notificationContent.sound = .default
+        
+        let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: alarm.fireDate)
+        let notificationTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
+        let request = UNNotificationRequest(identifier: alarm.uuid, content: notificationContent, trigger: notificationTrigger)
+        
+        UNUserNotificationCenter.current().add(request) { (error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func cancelUserNotifications(for alarm: Alarm) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [alarm.uuid])
+    }
+}
 
 class AlarmController {
     
@@ -25,21 +54,37 @@ class AlarmController {
         let newAlarm = Alarm(fireDate: fireDate, alarmName: name, alarmEnabled: isEnabled)
         alarms.append(newAlarm)
         saveToPersistentStore()
+        if newAlarm.alarmEnabled {
+            scheduleUserNotifications(for: newAlarm)
+        } else { return }
     }
+    
     func updateAlarmOfType(alarm: Alarm, with oldName: String, fireDate: Date, isEnabled: Bool) {
         alarm.alarmName = oldName
         alarm.fireDate = fireDate
         alarm.alarmEnabled = isEnabled
         saveToPersistentStore()
+        if alarm.alarmEnabled {
+            scheduleUserNotifications(for: alarm)
+        } else {
+            cancelUserNotifications(for: alarm)
+        }
     }
+    
     func deleteAlarm(alarmToDelete: Alarm) {
         if let alarmIndex = alarms.firstIndex(of: alarmToDelete) {
             alarms.remove(at: alarmIndex)
             saveToPersistentStore()
         }
     }
+    
     func toggleEnabled(for alarm: Alarm) {
         alarm.alarmEnabled = !alarm.alarmEnabled
+        if alarm.alarmEnabled {
+            scheduleUserNotifications(for: alarm)
+        } else {
+            cancelUserNotifications(for: alarm)
+        }
     }
     
 //    PERSISTENCE FUNCTIONS

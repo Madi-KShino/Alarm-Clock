@@ -19,8 +19,7 @@ class AlarmsListTableViewController: UITableViewController {
         tableView.reloadData()
     }
 
-    // MARK: - Table view data source
-
+    //TABLE VIEW DATA
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return AlarmController.sharedInstance.alarms.count
     }
@@ -34,7 +33,7 @@ class AlarmsListTableViewController: UITableViewController {
         return cell
     }
 
-    // Override to support editing the table view.
+   //DELETE EDITING
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let alarmToRemove = AlarmController.sharedInstance.alarms[indexPath.row]
@@ -43,8 +42,7 @@ class AlarmsListTableViewController: UITableViewController {
         }
     }
 
-    // MARK: - Navigation
-
+    //SEGUE
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toAlarmDetailViewController", let indexPath = tableView.indexPathForSelectedRow {
             let destinationVC = segue.destination as? AlarmDetailTableViewController
@@ -54,7 +52,7 @@ class AlarmsListTableViewController: UITableViewController {
     }
 }
 
-//    Conform to protocol
+//CONFORM TO PROTOCOL
 extension AlarmsListTableViewController: SwitchCellDelegate {
     func switchCellSwitchValueChanged(cell: SwitchTableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }

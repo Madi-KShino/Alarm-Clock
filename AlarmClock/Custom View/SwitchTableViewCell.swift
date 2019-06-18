@@ -29,13 +29,11 @@ class SwitchTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var alarmSwitch: UISwitch!
     
-    
     func updateViews(alarm: Alarm) {
         timeLabel.text = alarm.fireTimeAsString
         nameLabel.text = alarm.alarmName
         alarmSwitch.isOn = alarm.alarmEnabled
     }
-    
     
     @IBAction func switchValueChanged(_ sender: UISwitch) {
         cellDelegate?.switchCellSwitchValueChanged(cell: self)

@@ -16,8 +16,8 @@ class Alarm: Codable {
     var uuid: String
     var fireTimeAsString: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .medium
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .short
         return dateFormatter.string(from: fireDate)
     }
     
