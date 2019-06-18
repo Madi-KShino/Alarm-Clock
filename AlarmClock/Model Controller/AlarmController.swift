@@ -42,7 +42,7 @@ class AlarmController {
         alarm.alarmEnabled = !alarm.alarmEnabled
     }
     
-    //PERSISTENCE FUNCTIONS
+//    PERSISTENCE FUNCTIONS
     func saveToPersistentStore() {
         let jsonEncoder = JSONEncoder()
         do {
@@ -52,7 +52,7 @@ class AlarmController {
             print("Error saving to persistent store: \(error.localizedDescription)")
         }
     }
-    
+
     func loadFromPersistentStore() {
         let jsonDecoder = JSONDecoder()
         do {
@@ -63,7 +63,7 @@ class AlarmController {
             print("Error loading from persistent store: \(error.localizedDescription)")
         }
     }
-    
+
     func fileURL() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentDirectory = paths[0]

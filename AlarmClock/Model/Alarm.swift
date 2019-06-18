@@ -14,13 +14,13 @@ class Alarm: Codable {
     var fireDate: Date
     var alarmEnabled: Bool
     var uuid: String
-    
     var fireTimeAsString: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .medium
         return dateFormatter.string(from: fireDate)
     }
+    
     init(fireDate: Date = Date(), alarmName: String, alarmEnabled: Bool = true, uuid: String = UUID().uuidString) {
         self.fireDate = fireDate
         self.alarmName = alarmName
@@ -33,7 +33,6 @@ extension Alarm: Equatable {
     static func ==(lhs: Alarm, rhs: Alarm) -> Bool {
         return lhs.alarmName == rhs.alarmName &&
             lhs.fireDate == rhs.fireDate &&
-            lhs.alarmEnabled == rhs.alarmEnabled &&
-            lhs.uuid == rhs.uuid
+            lhs.fireTimeAsString == rhs.fireTimeAsString
     }
 }
