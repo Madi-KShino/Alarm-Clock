@@ -64,8 +64,8 @@
 			isa = PBXGroup;
 			children = (
 				534D67A322B83F1F0085702F /* Model */,
-				534D67A422B83F390085702F /* View Controller */,
 				534D67AB22B84A580085702F /* Model Controller */,
+				534D67A422B83F390085702F /* View Controller */,
 				534D679822B82FFB0085702F /* Resources */,
 			);
 			path = AlarmClock;

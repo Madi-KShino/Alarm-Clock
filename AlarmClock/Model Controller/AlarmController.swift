@@ -21,14 +21,15 @@ class AlarmController {
     }
     
     //EDITING FUNCTIONS
-    func addAlarmWith(fireDate: Date, name: String) {
-        let newAlarm = Alarm(fireDate: fireDate, alarmName: name)
+    func addAlarmWith(fireDate: Date, name: String, isEnabled: Bool) {
+        let newAlarm = Alarm(fireDate: fireDate, alarmName: name, alarmEnabled: isEnabled)
         alarms.append(newAlarm)
         saveToPersistentStore()
     }
-    func updateAlarmOfType(alarm: Alarm, with oldName: String, fireDate: Date) {
+    func updateAlarmOfType(alarm: Alarm, with oldName: String, fireDate: Date, isEnabled: Bool) {
         alarm.alarmName = oldName
         alarm.fireDate = fireDate
+        alarm.alarmEnabled = isEnabled
         saveToPersistentStore()
     }
     func deleteAlarm(alarmToDelete: Alarm) {

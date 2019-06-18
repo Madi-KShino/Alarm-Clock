@@ -10,14 +10,18 @@ import UIKit
 
 //Define the Delegate Protocol
 protocol SwitchCellDelegate: class {
-    func switchCellSwitchValueChanged(for cell: SwitchTableViewCell)
+    func switchCellSwitchValueChanged(cell: SwitchTableViewCell)
 }
 
 class SwitchTableViewCell: UITableViewCell {
-
+    
+    //Define the Delegate
+    weak var cellDelegate: SwitchCellDelegate?
+    
     var alarm: Alarm? {
         didSet {
-            updateViews()
+            guard let alarm = alarm else { return }
+            updateViews(alarm: alarm)
         }
     }
     
@@ -25,19 +29,15 @@ class SwitchTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var alarmSwitch: UISwitch!
     
-    //Define the Delegate
-    weak var delegate: SwitchCellDelegate?
     
-    func updateViews() {
-        guard let alarm = alarm else { return }
+    func updateViews(alarm: Alarm) {
         timeLabel.text = alarm.fireTimeAsString
         nameLabel.text = alarm.alarmName
         alarmSwitch.isOn = alarm.alarmEnabled
     }
     
-
-    @IBAction func switchValueChanged(_ sender: Any) {
-        delegate?.switchCellSwitchValueChanged(for: self)
-    }
     
+    @IBAction func switchValueChanged(_ sender: UISwitch) {
+        cellDelegate?.switchCellSwitchValueChanged(cell: self)
+    }
 }

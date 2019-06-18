@@ -9,10 +9,12 @@
 import Foundation
 
 class Alarm: Codable {
+    
     var alarmName: String
     var fireDate: Date
     var alarmEnabled: Bool
     var uuid: String
+    
     var fireTimeAsString: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
@@ -30,6 +32,8 @@ class Alarm: Codable {
 extension Alarm: Equatable {
     static func ==(lhs: Alarm, rhs: Alarm) -> Bool {
         return lhs.alarmName == rhs.alarmName &&
-            lhs.fireDate == rhs.fireDate 
+            lhs.fireDate == rhs.fireDate &&
+            lhs.alarmEnabled == rhs.alarmEnabled &&
+            lhs.uuid == rhs.uuid
     }
 }
