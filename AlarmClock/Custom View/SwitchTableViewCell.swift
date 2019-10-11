@@ -33,6 +33,13 @@ class SwitchTableViewCell: UITableViewCell {
         timeLabel.text = alarm.fireTimeAsString
         nameLabel.text = alarm.alarmName
         alarmSwitch.isOn = alarm.alarmEnabled
+        if alarmSwitch.isOn == true {
+            nameLabel.textColor = .white
+            timeLabel.textColor = .white
+        } else {
+            nameLabel.textColor = .lightGray
+            timeLabel.textColor = .lightGray
+        }
     }
     
     @IBAction func switchValueChanged(_ sender: UISwitch) {
