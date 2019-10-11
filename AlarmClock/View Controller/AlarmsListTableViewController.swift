@@ -10,9 +10,10 @@ import UIKit
 
 class AlarmsListTableViewController: UITableViewController {
    
-    
+    //LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .black
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

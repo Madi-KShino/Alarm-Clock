@@ -8,8 +8,10 @@
 
 import Foundation
 
+//OBJECT
 class Alarm: Codable {
     
+    //CLASS PROPERTIES
     var alarmName: String
     var fireDate: Date
     var alarmEnabled: Bool
@@ -21,6 +23,7 @@ class Alarm: Codable {
         return dateFormatter.string(from: fireDate)
     }
     
+    //CONVENIENCE/DESIGNATED INIT
     init(fireDate: Date = Date(), alarmName: String, alarmEnabled: Bool = true, uuid: String = UUID().uuidString) {
         self.fireDate = fireDate
         self.alarmName = alarmName
@@ -29,6 +32,7 @@ class Alarm: Codable {
     }
 }
 
+//CONFORM TO EQUATABLE
 extension Alarm: Equatable {
     static func ==(lhs: Alarm, rhs: Alarm) -> Bool {
         return lhs.alarmName == rhs.alarmName &&
