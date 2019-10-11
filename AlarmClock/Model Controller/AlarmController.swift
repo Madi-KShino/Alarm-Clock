@@ -9,34 +9,13 @@
 import Foundation
 import UserNotifications
 
+//DEFINE PROTOCOL FOR SENDING ALARM NOTIFICATIONS
 protocol AlarmScheduler: class {
     func scheduleUserNotifications(for alarm: Alarm)
     func cancelUserNotifications(for alarm: Alarm)
 }
 
-extension AlarmController: AlarmScheduler {
-    func scheduleUserNotifications(for alarm: Alarm) {
-        let notificationContent = UNMutableNotificationContent()
-        notificationContent.title = "⏰"
-        notificationContent.body = "Click to View Your Alarm"
-        notificationContent.sound = .default
-        
-        let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: alarm.fireDate)
-        let notificationTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
-        let request = UNNotificationRequest(identifier: alarm.uuid, content: notificationContent, trigger: notificationTrigger)
-        
-        UNUserNotificationCenter.current().add(request) { (error) in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    func cancelUserNotifications(for alarm: Alarm) {
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [alarm.uuid])
-    }
-}
-
+//ALARM CONTROLLER CLASS
 class AlarmController {
     
     //SINGLETON
@@ -88,7 +67,7 @@ class AlarmController {
         }
     }
     
-//    PERSISTENCE FUNCTIONS
+    //PERSISTENCE FUNCTIONS
     func saveToPersistentStore() {
         let jsonEncoder = JSONEncoder()
         do {
@@ -116,5 +95,29 @@ class AlarmController {
         let fileName = "alarmClock.json"
         let url = documentDirectory.appendingPathComponent(fileName)
         return url
+    }
+}
+
+//EXTENSION - SEND NOTIFICATIONS FOR THE ALARMS SET
+extension AlarmController: AlarmScheduler {
+    func scheduleUserNotifications(for alarm: Alarm) {
+        let notificationContent = UNMutableNotificationContent()
+        notificationContent.title = "⏰"
+        notificationContent.body = "Click to View Your Alarm"
+        notificationContent.sound = .default
+        
+        let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: alarm.fireDate)
+        let notificationTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
+        let request = UNNotificationRequest(identifier: alarm.uuid, content: notificationContent, trigger: notificationTrigger)
+        
+        UNUserNotificationCenter.current().add(request) { (error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func cancelUserNotifications(for alarm: Alarm) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [alarm.uuid])
     }
 }

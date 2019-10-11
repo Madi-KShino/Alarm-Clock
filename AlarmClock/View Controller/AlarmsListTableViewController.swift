@@ -53,7 +53,7 @@ class AlarmsListTableViewController: UITableViewController {
     }
 }
 
-//CONFORM TO PROTOCOL
+//CONFORM TO PROTOCOL (Declared on Custom Cell for switch functionality)
 extension AlarmsListTableViewController: SwitchCellDelegate {
     func switchCellSwitchValueChanged(cell: SwitchTableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }

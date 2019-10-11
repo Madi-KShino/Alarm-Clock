@@ -13,6 +13,7 @@ protocol SwitchCellDelegate: class {
     func switchCellSwitchValueChanged(cell: SwitchTableViewCell)
 }
 
+//CLASS
 class SwitchTableViewCell: UITableViewCell {
     
     //DEFINE DELEGATE
@@ -25,10 +26,12 @@ class SwitchTableViewCell: UITableViewCell {
         }
     }
     
+    //OUTLETS
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var alarmSwitch: UISwitch!
     
+    //CHANGE VIEW (depending on alarm object properties)
     func updateViews(alarm: Alarm) {
         timeLabel.text = alarm.fireTimeAsString
         nameLabel.text = alarm.alarmName
@@ -42,6 +45,7 @@ class SwitchTableViewCell: UITableViewCell {
         }
     }
     
+    //ACTIONS
     @IBAction func switchValueChanged(_ sender: UISwitch) {
         cellDelegate?.switchCellSwitchValueChanged(cell: self)
     }
